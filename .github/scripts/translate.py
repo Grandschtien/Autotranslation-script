@@ -11,7 +11,7 @@ import requests
 # Configuration
 CONFIG = {
     'anthropic_api_key': os.environ.get('ANTHROPIC_API_KEY', ''),
-    'model': 'claude-3-5-haiku-20241022',
+    'model': 'claude-haiku-4-20250110',
     'languages': {
         'de': 'German',
         'fr': 'French',
