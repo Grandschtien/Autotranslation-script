@@ -2,3 +2,100 @@
   Localizable.strings
   AutotranslationTest - Malay
 */
+
+/* Application name displayed in navigation bar and app launcher */
+"app_name" = "TODO: Translation failed - Auto Translation Test";
+
+/* Greeting text shown on the home screen header */
+"welcome" = "TODO: Translation failed - Welcome";
+
+/* Standard greeting message used in user notifications and messages */
+"hello" = "TODO: Translation failed - Hello";
+
+/* Farewell message shown when user logs out or exits */
+"goodbye" = "TODO: Translation failed - Goodbye";
+
+/* Affirmative button text in confirmation dialogs */
+"yes" = "TODO: Translation failed - Yes";
+
+/* Negative button text in confirmation dialogs */
+"no" = "TODO: Translation failed - No";
+
+/* Primary action button text in alert dialogs */
+"ok" = "TODO: Translation failed - OK";
+
+/* Secondary action button text to dismiss dialogs without saving */
+"cancel" = "TODO: Translation failed - Cancel";
+
+/* Button text to save changes in forms and settings */
+"save" = "TODO: Translation failed - Save";
+
+/* Button text to remove items, used in list views and detail screens */
+"delete" = "TODO: Translation failed - Delete";
+
+/* Button text to enter edit mode in profile and settings screens */
+"edit" = "TODO: Translation failed - Edit";
+
+/* Button text to complete an action or exit edit mode */
+"done" = "TODO: Translation failed - Done";
+
+/* Navigation button to return to previous screen */
+"back" = "TODO: Translation failed - Back";
+
+/* Button text to proceed to the next step in multi-step flows */
+"next" = "TODO: Translation failed - Next";
+
+/* Button text to close modal views and dialogs */
+"close" = "TODO: Translation failed - Close";
+
+/* Welcome message displayed on the onboarding screen after first launch */
+"welcome_message" = "TODO: Translation failed - Welcome to the Auto Translation Test application! We're glad to have you here.";
+
+/* Loading indicator text shown during data fetch operations */
+"loading" = "TODO: Translation failed - Please wait while we're loading your content...";
+
+/* Generic error message shown in alert dialog when operations fail */
+"error_message" = "TODO: Translation failed - An unexpected error has occurred. Please try again later or contact support if the problem persists.";
+
+/* Success message displayed in toast notification after successful operations */
+"success_message" = "TODO: Translation failed - Your operation has been completed successfully! You can now proceed to the next step.";
+
+/* Confirmation dialog message for destructive actions like delete */
+"confirmation_message" = "TODO: Translation failed - Are you sure you want to proceed with this action? This cannot be undone.";
+
+/* Title on the settings screen navigation bar */
+"settings_title" = "TODO: Translation failed - Application Settings";
+
+/* Title on the user profile screen navigation bar */
+"profile_title" = "TODO: Translation failed - User Profile";
+
+/* Section header in settings for notification preferences */
+"notifications_title" = "TODO: Translation failed - Notification Preferences";
+
+/* Instruction text above language picker in settings */
+"language_selection" = "TODO: Translation failed - Please select your preferred language from the list below.";
+
+/* Button text at bottom of profile edit form to commit changes */
+"save_changes" = "TODO: Translation failed - Save all changes to your profile";
+
+/* Button text at bottom of profile edit form to revert changes */
+"discard_changes" = "TODO: Translation failed - Discard all unsaved changes";
+
+/* First step description in the onboarding tutorial flow */
+"tutorial_step_1" = "TODO: Translation failed - In this first step, you'll learn how to navigate through the application interface and access the main features available to you.";
+
+/* Second step description in the onboarding tutorial flow */
+"tutorial_step_2" = "TODO: Translation failed - Now that you've mastered the basics, let's explore some advanced features that will help you make the most of this application.";
+
+/* Final step description in the onboarding tutorial flow */
+"tutorial_step_3" = "TODO: Translation failed - Congratulations! You've completed the tutorial and are now ready to use all the powerful features this application has to offer.";
+
+/* Status message shown during cloud synchronization with progress indicator */
+"data_sync_message" = "TODO: Translation failed - Your data is currently being synchronized with our cloud servers. This process may take several minutes depending on your internet connection speed.";
+
+/* Privacy policy summary text displayed in settings and onboarding */
+"privacy_notice" = "TODO: Translation failed - We take your privacy seriously. All your personal information is encrypted and stored securely in compliance with international data protection standards.";
+
+/* Alert message shown when app update is available, with update button */
+"update_available" = "TODO: Translation failed - A new version of the application is available for download. Would you like to update now to enjoy the latest features and improvements?";
+
