@@ -3,6 +3,9 @@
   AutotranslationTest - Malay
 */
 
+/* Title of section in the file with several sections */
+"screen_cast" = ""Screencast: Pengesanan Anomali "";
+
 /* Application name displayed in navigation bar and app launcher */
 "app_name" = ""Ujian Terjemahan Automatik"";
 
