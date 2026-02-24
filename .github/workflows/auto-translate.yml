@@ -42,27 +42,40 @@ jobs:
         id: check_changes
         run: |
           if [ -f "translation-summary.json" ]; then
-            echo "changes_detected=true" >> $GITHUB_OUTPUT
-
-            # Read summary
-            NEW_KEYS=$(jq -r '.new_keys' translation-summary.json)
-            MODIFIED_KEYS=$(jq -r '.modified_keys' translation-summary.json)
-            DELETED_KEYS=$(jq -r '.deleted_keys' translation-summary.json)
-            LANGUAGES=$(jq -r '.languages_updated' translation-summary.json)
-
-            echo "new_keys=$NEW_KEYS" >> $GITHUB_OUTPUT
-            echo "modified_keys=$MODIFIED_KEYS" >> $GITHUB_OUTPUT
-            echo "deleted_keys=$DELETED_KEYS" >> $GITHUB_OUTPUT
-            echo "languages=$LANGUAGES" >> $GITHUB_OUTPUT
-
-            # Check if there are actual changes
-            TOTAL=$((NEW_KEYS + MODIFIED_KEYS + DELETED_KEYS))
-            if [ "$TOTAL" -eq 0 ]; then
-              echo "changes_detected=false" >> $GITHUB_OUTPUT
-            fi
+            NEW_KEYS=$(jq -r '.new_keys // 0' translation-summary.json)
+            MODIFIED_KEYS=$(jq -r '.modified_keys // 0' translation-summary.json)
+            DELETED_KEYS=$(jq -r '.deleted_keys // 0' translation-summary.json)
+            LANGUAGES=$(jq -r '.languages_updated // 0' translation-summary.json)
           else
-            echo "changes_detected=false" >> $GITHUB_OUTPUT
+            NEW_KEYS=0
+            MODIFIED_KEYS=0
+            DELETED_KEYS=0
+            LANGUAGES=0
           fi
+
+          TOTAL=$((NEW_KEYS + MODIFIED_KEYS + DELETED_KEYS))
+
+          if git diff --quiet --exit-code; then
+            GIT_HAS_CHANGES=false
+          else
+            GIT_HAS_CHANGES=true
+          fi
+
+          echo "new_keys=$NEW_KEYS" >> "$GITHUB_OUTPUT"
+          echo "modified_keys=$MODIFIED_KEYS" >> "$GITHUB_OUTPUT"
+          echo "deleted_keys=$DELETED_KEYS" >> "$GITHUB_OUTPUT"
+          echo "languages=$LANGUAGES" >> "$GITHUB_OUTPUT"
+
+          if [ "$TOTAL" -gt 0 ] || [ "$GIT_HAS_CHANGES" = "true" ]; then
+            echo "changes_detected=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changes_detected=false" >> "$GITHUB_OUTPUT"
+          fi
+
+          echo "Summary totals: new=$NEW_KEYS modified=$MODIFIED_KEYS deleted=$DELETED_KEYS"
+          echo "Summary total changed keys: $TOTAL"
+          echo "Git working tree changed: $GIT_HAS_CHANGES"
+          git status --short
 
       - name: Get current date
         if: steps.check_changes.outputs.changes_detected == 'true'
