@@ -2,3 +2,100 @@
   Localizable.strings
   AutotranslationTest - Portuguese
 */
+
+/* Application name displayed in navigation bar and app launcher */
+"app_name" = ""Teste de Tradução Automática"";
+
+/* Greeting text shown on the home screen header */
+"welcome" = ""Bem-vindo"";
+
+/* Standard greeting message used in user notifications and messages */
+"hello" = ""Olá"";
+
+/* Farewell message shown when user logs out or exits */
+"goodbye" = ""Adeus"";
+
+/* Affirmative button text in confirmation dialogs */
+"yes" = "Sim";
+
+/* Negative button text in confirmation dialogs */
+"no" = "Não";
+
+/* Primary action button text in alert dialogs */
+"ok" = "OK";
+
+/* Secondary action button text to dismiss dialogs without saving */
+"cancel" = ""Cancelar"";
+
+/* Button text to save changes in forms and settings */
+"save" = "Salvar";
+
+/* Button text to remove items, used in list views and detail screens */
+"delete" = ""Excluir"";
+
+/* Button text to enter edit mode in profile and settings screens */
+"edit" = "Editar";
+
+/* Button text to complete an action or exit edit mode */
+"done" = "Concluído";
+
+/* Navigation button to return to previous screen */
+"back" = "Voltar";
+
+/* Button text to proceed to the next step in multi-step flows */
+"next" = ""Próximo"";
+
+/* Button text to close modal views and dialogs */
+"close" = ""Fechar"";
+
+/* Welcome message displayed on the onboarding screen after first launch */
+"welcome_message" = ""Bem-vindo ao aplicativo Auto Translation Test! Estamos felizes em ter você aqui."";
+
+/* Loading indicator text shown during data fetch operations */
+"loading" = ""Aguarde enquanto carregamos seu conteúdo..."";
+
+/* Generic error message shown in alert dialog when operations fail */
+"error_message" = ""Ocorreu um erro inesperado. Tente novamente mais tarde ou entre em contato com o suporte se o problema persistir."";
+
+/* Success message displayed in toast notification after successful operations */
+"success_message" = ""Sua operação foi concluída com sucesso! Agora você pode prosseguir para a próxima etapa."";
+
+/* Confirmation dialog message for destructive actions like delete */
+"confirmation_message" = ""Tem certeza que deseja prosseguir com esta ação? Esta operação não pode ser desfeita."";
+
+/* Title on the settings screen navigation bar */
+"settings_title" = "Configurações do Aplicativo";
+
+/* Title on the user profile screen navigation bar */
+"profile_title" = "Perfil do Usuário";
+
+/* Section header in settings for notification preferences */
+"notifications_title" = "Preferências de Notificações";
+
+/* Instruction text above language picker in settings */
+"language_selection" = ""Por favor, selecione seu idioma preferido na lista abaixo."";
+
+/* Button text at bottom of profile edit form to commit changes */
+"save_changes" = ""Salvar todas as alterações no seu perfil"";
+
+/* Button text at bottom of profile edit form to revert changes */
+"discard_changes" = "Descartar todas as alterações não salvas";
+
+/* First step description in the onboarding tutorial flow */
+"tutorial_step_1" = ""Neste primeiro passo, você aprenderá como navegar pela interface do aplicativo e acessar os principais recursos disponíveis para você."";
+
+/* Second step description in the onboarding tutorial flow */
+"tutorial_step_2" = ""Agora que você dominou o básico, vamos explorar alguns recursos avançados que vão te ajudar a aproveitar ao máximo esta aplicação."";
+
+/* Final step description in the onboarding tutorial flow */
+"tutorial_step_3" = ""Parabéns! Você concluiu o tutorial e agora está pronto para usar todos os poderosos recursos que este aplicativo tem a oferecer."";
+
+/* Status message shown during cloud synchronization with progress indicator */
+"data_sync_message" = "Seus dados estão sendo sincronizados com nossos servidores na nuvem. Este processo pode levar alguns minutos dependendo da velocidade da sua conexão com a internet.";
+
+/* Privacy policy summary text displayed in settings and onboarding */
+"privacy_notice" = ""Levamos a sua privacidade a sério. Todas as suas informações pessoais são encriptadas e armazenadas com segurança, em conformidade com os padrões internacionais de proteção de dados."";
+
+/* Alert message shown when app update is available, with update button */
+"update_available" = ""Uma nova versão do aplicativo está disponível para download. Deseja atualizar agora para aproveitar os recursos e melhorias mais recentes?"";
+

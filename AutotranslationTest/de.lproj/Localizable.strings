@@ -2,3 +2,100 @@
   Localizable.strings
   AutotranslationTest - German
 */
+
+/* Application name displayed in navigation bar and app launcher */
+"app_name" = "„Automatischer Übersetzungstest"";
+
+/* Greeting text shown on the home screen header */
+"welcome" = "Willkommen";
+
+/* Standard greeting message used in user notifications and messages */
+"hello" = "Hallo";
+
+/* Farewell message shown when user logs out or exits */
+"goodbye" = "Auf Wiedersehen";
+
+/* Affirmative button text in confirmation dialogs */
+"yes" = "Ja";
+
+/* Negative button text in confirmation dialogs */
+"no" = "Nein";
+
+/* Primary action button text in alert dialogs */
+"ok" = "OK";
+
+/* Secondary action button text to dismiss dialogs without saving */
+"cancel" = "Abbrechen";
+
+/* Button text to save changes in forms and settings */
+"save" = "Speichern";
+
+/* Button text to remove items, used in list views and detail screens */
+"delete" = "Löschen";
+
+/* Button text to enter edit mode in profile and settings screens */
+"edit" = "Bearbeiten";
+
+/* Button text to complete an action or exit edit mode */
+"done" = "Fertig";
+
+/* Navigation button to return to previous screen */
+"back" = "Zurück";
+
+/* Button text to proceed to the next step in multi-step flows */
+"next" = "Weiter";
+
+/* Button text to close modal views and dialogs */
+"close" = "Schließen";
+
+/* Welcome message displayed on the onboarding screen after first launch */
+"welcome_message" = "„Willkommen bei der Auto Translation Test-Anwendung! Wir freuen uns, Sie hier zu haben."";
+
+/* Loading indicator text shown during data fetch operations */
+"loading" = "„Bitte warten, während wir Ihre Inhalte laden..."";
+
+/* Generic error message shown in alert dialog when operations fail */
+"error_message" = "„Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut oder kontaktieren Sie den Support, falls das Problem weiterhin besteht."";
+
+/* Success message displayed in toast notification after successful operations */
+"success_message" = "„Ihr Vorgang wurde erfolgreich abgeschlossen! Sie können nun mit dem nächsten Schritt fortfahren."";
+
+/* Confirmation dialog message for destructive actions like delete */
+"confirmation_message" = "„Bist du sicher, dass du diese Aktion durchführen möchtest? Dies kann nicht rückgängig gemacht werden."";
+
+/* Title on the settings screen navigation bar */
+"settings_title" = "App-Einstellungen";
+
+/* Title on the user profile screen navigation bar */
+"profile_title" = "Benutzerprofil";
+
+/* Section header in settings for notification preferences */
+"notifications_title" = "Benachrichtigungseinstellungen";
+
+/* Instruction text above language picker in settings */
+"language_selection" = "Bitte wählen Sie Ihre bevorzugte Sprache aus der Liste unten aus.";
+
+/* Button text at bottom of profile edit form to commit changes */
+"save_changes" = ""Alle Profiländerungen speichern"";
+
+/* Button text at bottom of profile edit form to revert changes */
+"discard_changes" = "Alle ungespeicherten Änderungen verwerfen";
+
+/* First step description in the onboarding tutorial flow */
+"tutorial_step_1" = "„In diesem ersten Schritt lernst du, wie du durch die Benutzeroberfläche navigierst und auf die wichtigsten Funktionen zugreifst, die dir zur Verfügung stehen."";
+
+/* Second step description in the onboarding tutorial flow */
+"tutorial_step_2" = "„Jetzt, wo Sie die Grundlagen beherrschen, erkunden wir einige erweiterte Funktionen, die Ihnen helfen, das Beste aus dieser Anwendung herauszuholen."";
+
+/* Final step description in the onboarding tutorial flow */
+"tutorial_step_3" = "„Herzlichen Glückwunsch! Du hast das Tutorial abgeschlossen und bist jetzt bereit, alle leistungsstarken Funktionen dieser App zu nutzen."";
+
+/* Status message shown during cloud synchronization with progress indicator */
+"data_sync_message" = "Ihre Daten werden derzeit mit unseren Cloud-Servern synchronisiert. Dieser Vorgang kann je nach Ihrer Internetverbindungsgeschwindigkeit einige Minuten dauern.";
+
+/* Privacy policy summary text displayed in settings and onboarding */
+"privacy_notice" = "„Wir nehmen Ihren Datenschutz ernst. Alle Ihre persönlichen Daten werden verschlüsselt und in Übereinstimmung mit internationalen Datenschutzstandards sicher gespeichert."";
+
+/* Alert message shown when app update is available, with update button */
+"update_available" = "„Eine neue Version der App steht zum Download bereit. Möchten Sie jetzt aktualisieren, um die neuesten Funktionen und Verbesserungen zu genießen?"";
+

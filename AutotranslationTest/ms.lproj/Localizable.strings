@@ -2,3 +2,100 @@
   Localizable.strings
   AutotranslationTest - Malay
 */
+
+/* Application name displayed in navigation bar and app launcher */
+"app_name" = ""Ujian Terjemahan Automatik"";
+
+/* Greeting text shown on the home screen header */
+"welcome" = "Selamat Datang";
+
+/* Standard greeting message used in user notifications and messages */
+"hello" = ""Helo"";
+
+/* Farewell message shown when user logs out or exits */
+"goodbye" = ""Selamat tinggal"";
+
+/* Affirmative button text in confirmation dialogs */
+"yes" = ""Ya"";
+
+/* Negative button text in confirmation dialogs */
+"no" = ""Tidak"";
+
+/* Primary action button text in alert dialogs */
+"ok" = "OK";
+
+/* Secondary action button text to dismiss dialogs without saving */
+"cancel" = "Batal";
+
+/* Button text to save changes in forms and settings */
+"save" = "Simpan";
+
+/* Button text to remove items, used in list views and detail screens */
+"delete" = ""Padam"";
+
+/* Button text to enter edit mode in profile and settings screens */
+"edit" = "Edit";
+
+/* Button text to complete an action or exit edit mode */
+"done" = "Selesai";
+
+/* Navigation button to return to previous screen */
+"back" = ""Kembali"";
+
+/* Button text to proceed to the next step in multi-step flows */
+"next" = "Seterusnya";
+
+/* Button text to close modal views and dialogs */
+"close" = "Tutup";
+
+/* Welcome message displayed on the onboarding screen after first launch */
+"welcome_message" = ""Selamat datang ke aplikasi Auto Translation Test! Kami gembira anda berada di sini."";
+
+/* Loading indicator text shown during data fetch operations */
+"loading" = ""Sila tunggu semasa kami memuatkan kandungan anda..."";
+
+/* Generic error message shown in alert dialog when operations fail */
+"error_message" = ""Ralat tidak dijangka telah berlaku. Sila cuba lagi kemudian atau hubungi sokongan jika masalah berterusan."";
+
+/* Success message displayed in toast notification after successful operations */
+"success_message" = ""Operasi anda telah berjaya diselesaikan! Anda kini boleh meneruskan ke langkah seterusnya."";
+
+/* Confirmation dialog message for destructive actions like delete */
+"confirmation_message" = ""Adakah anda pasti mahu meneruskan tindakan ini? Tindakan ini tidak boleh dibatalkan."";
+
+/* Title on the settings screen navigation bar */
+"settings_title" = "Tetapan Aplikasi";
+
+/* Title on the user profile screen navigation bar */
+"profile_title" = "Profil Pengguna";
+
+/* Section header in settings for notification preferences */
+"notifications_title" = ""Keutamaan Pemberitahuan"";
+
+/* Instruction text above language picker in settings */
+"language_selection" = "Sila pilih bahasa pilihan anda daripada senarai di bawah.";
+
+/* Button text at bottom of profile edit form to commit changes */
+"save_changes" = "Simpan semua perubahan pada profil anda";
+
+/* Button text at bottom of profile edit form to revert changes */
+"discard_changes" = "Buang semua perubahan yang tidak disimpan";
+
+/* First step description in the onboarding tutorial flow */
+"tutorial_step_1" = ""Dalam langkah pertama ini, anda akan belajar cara menavigasi antara muka aplikasi dan mengakses ciri-ciri utama yang tersedia untuk anda."";
+
+/* Second step description in the onboarding tutorial flow */
+"tutorial_step_2" = ""Kini setelah anda menguasai asasnya, mari kita terokai beberapa ciri lanjutan yang akan membantu anda memanfaatkan aplikasi ini sepenuhnya."";
+
+/* Final step description in the onboarding tutorial flow */
+"tutorial_step_3" = ""Tahniah! Anda telah melengkapkan tutorial dan kini bersedia untuk menggunakan semua ciri hebat yang ditawarkan oleh aplikasi ini."";
+
+/* Status message shown during cloud synchronization with progress indicator */
+"data_sync_message" = "Data anda sedang disegerakkan dengan pelayan awan kami. Proses ini mungkin mengambil beberapa minit bergantung pada kelajuan sambungan internet anda.";
+
+/* Privacy policy summary text displayed in settings and onboarding */
+"privacy_notice" = ""Kami mengambil berat tentang privasi anda. Semua maklumat peribadi anda disulitkan dan disimpan dengan selamat selaras dengan piawaian perlindungan data antarabangsa."";
+
+/* Alert message shown when app update is available, with update button */
+"update_available" = ""Versi baharu aplikasi tersedia untuk dimuat turun. Adakah anda ingin mengemas kini sekarang untuk menikmati ciri dan penambahbaikan terkini?"";
+
