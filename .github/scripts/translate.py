@@ -185,12 +185,12 @@ def resolve_model(api_key: str) -> str:
     try:
         available = list_available_models(api_key)
     except Exception as error:
-        print(f"⚠️  Could not fetch model list. Continuing with configured model '{requested}'.")
+        print(f"Could not fetch model list. Continuing with configured model '{requested}'.")
         print(f"   Reason: {error}")
         return requested
 
     if not available:
-        print(f"⚠️  Model list was empty. Continuing with configured model '{requested}'.")
+        print(f"Model list was empty. Continuing with configured model '{requested}'.")
         return requested
 
     if requested in available:
@@ -198,11 +198,11 @@ def resolve_model(api_key: str) -> str:
 
     for fallback in CONFIG['model_fallbacks']:
         if fallback in available:
-            print(f"⚠️  Configured model '{requested}' is unavailable. Using '{fallback}' instead.")
+            print(f"Configured model '{requested}' is unavailable. Using '{fallback}' instead.")
             return fallback
 
-    auto_selected = available[0]
-    print(f"⚠️  Configured model '{requested}' is unavailable. Using first available model '{auto_selected}'.")
+    auto_selected = next((m for m in available if 'haiku' in m.lower()), available[0])
+    print(f"Configured model '{requested}' is unavailable. Using first available model '{auto_selected}'.")
     return auto_selected
 
 
@@ -266,13 +266,13 @@ def translate_with_retry(text: str, context: str, target_language: str, api_key:
             translation = translate_with_claude(text, context, target_language, api_key, model)
             return translation
         except ClaudeAPIError as error:
-            print(f"   ❌ Translation attempt {attempt + 1} failed for {target_language}: {str(error)}")
+            print(f"   Translation attempt {attempt + 1} failed for {target_language}: {str(error)}")
             if not error.retryable:
                 raise
             if attempt < CONFIG['max_retries'] - 1:
                 time.sleep(CONFIG['retry_delay'] * (attempt + 1))
         except Exception as error:
-            print(f"   ❌ Translation attempt {attempt + 1} failed for {target_language}: {str(error)}")
+            print(f"   Translation attempt {attempt + 1} failed for {target_language}: {str(error)}")
             if attempt < CONFIG['max_retries'] - 1:
                 time.sleep(CONFIG['retry_delay'] * (attempt + 1))
 
@@ -293,7 +293,7 @@ def update_localization_file(lang_code: str, entries: List[Dict]):
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(content)
 
-    print(f"✓ Updated {lang_code}.lproj/Localizable.strings")
+    print(f"Updated {lang_code}.lproj/Localizable.strings")
 
 
 def remove_deleted_keys(lang_code: str, deleted_keys: List[str]):
@@ -328,7 +328,7 @@ def remove_deleted_keys(lang_code: str, deleted_keys: List[str]):
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(filtered_lines))
 
-    print(f"✓ Removed {len(deleted_keys)} deleted keys from {lang_code}.lproj/Localizable.strings")
+    print(f"Removed {len(deleted_keys)} deleted keys from {lang_code}.lproj/Localizable.strings")
 
 
 def update_truth_file(current_entries: List[LocalizationEntry]):
@@ -341,53 +341,53 @@ def update_truth_file(current_entries: List[LocalizationEntry]):
     with open(CONFIG['truth_file'], 'w', encoding='utf-8') as f:
         json.dump(truth_data, f, indent=2, ensure_ascii=False)
 
-    print("✓ Updated source of truth file")
+    print("Updated source of truth file")
 
 
 def main():
     """Main execution"""
-    print("🚀 Starting auto-translation process...\n")
+    print("Starting auto-translation process...\n")
 
     # Validate API key
     api_key = CONFIG['anthropic_api_key']
     if not api_key:
-        print("❌ Error: ANTHROPIC_API_KEY environment variable is not set")
+        print("Error: ANTHROPIC_API_KEY environment variable is not set")
         exit(1)
 
-    print("🤖 Resolving available Claude model...")
+    print("Resolving available Claude model...")
     resolved_model = resolve_model(api_key)
     print(f"   Using model: {resolved_model}\n")
 
     # Parse current English file
-    print("📖 Parsing English localization file...")
+    print("Parsing English localization file...")
     current_entries = parse_strings_file(CONFIG['source_file'])
     print(f"   Found {len(current_entries)} entries\n")
 
     # Load source of truth
-    print("📋 Loading source of truth...")
+    print("Loading source of truth...")
     truth_data = load_truth_file()
     print(f"   Previous state: {len(truth_data['keys'])} keys\n")
 
     # Detect changes
-    print("🔍 Detecting changes...")
+    print("Detecting changes...")
     changes = detect_changes(current_entries, truth_data)
     print(f"   New keys: {len(changes['new'])}")
     print(f"   Modified keys: {len(changes['modified'])}")
     print(f"   Deleted keys: {len(changes['deleted'])}\n")
 
     if not changes['new'] and not changes['modified'] and not changes['deleted']:
-        print("✨ No changes detected. Nothing to do!")
+        print("No changes detected. Nothing to do!")
         exit(0)
 
     # Prepare entries to translate
     entries_to_translate = changes['new'] + changes['modified']
 
     if entries_to_translate:
-        print(f"🌍 Translating {len(entries_to_translate)} entries to {len(CONFIG['languages'])} languages...\n")
+        print(f"Translating {len(entries_to_translate)} entries to {len(CONFIG['languages'])} languages...\n")
 
         # Translate for each language
         for lang_code, lang_name in CONFIG['languages'].items():
-            print(f"\n📝 Processing {lang_name} ({lang_code})...")
+            print(f"\nProcessing {lang_name} ({lang_code})...")
 
             translations = []
             fatal_api_error = None
@@ -405,7 +405,7 @@ def main():
                     # Small delay to avoid rate limiting
                     time.sleep(0.5)
                 except ClaudeAPIError as error:
-                    print(f"   ❌ Failed to translate {entry.key}: {str(error)}")
+                    print(f"   Failed to translate {entry.key}: {str(error)}")
                     if not error.retryable:
                         fatal_api_error = error
                         break
@@ -416,7 +416,7 @@ def main():
                         'context': entry.context
                     })
                 except Exception as error:
-                    print(f"   ❌ Failed to translate {entry.key}: {str(error)}")
+                    print(f"   Failed to translate {entry.key}: {str(error)}")
                     translations.append({
                         'key': entry.key,
                         'translation': f"TODO: Translation failed - {entry.value}",
@@ -424,8 +424,8 @@ def main():
                     })
 
             if fatal_api_error is not None:
-                print(f"   ⛔ {lang_name}: non-retryable API error, stopping run.")
-                print("\n❌ Aborting translation. Fix the API/model configuration and rerun.")
+                print(f"   {lang_name}: non-retryable API error, stopping run.")
+                print("\nAborting translation. Fix the API/model configuration and rerun.")
                 exit(1)
 
             # Load existing translations
@@ -452,16 +452,16 @@ def main():
 
     # Handle deleted keys
     if changes['deleted']:
-        print(f"\n🗑️  Removing {len(changes['deleted'])} deleted keys from all languages...\n")
+        print(f"\nRemoving {len(changes['deleted'])} deleted keys from all languages...\n")
 
         for lang_code in CONFIG['languages'].keys():
             remove_deleted_keys(lang_code, changes['deleted'])
 
     # Update source of truth
-    print("\n💾 Updating source of truth file...")
+    print("\nUpdating source of truth file...")
     update_truth_file(current_entries)
 
-    print("\n✅ Auto-translation completed successfully!")
+    print("\nAuto-translation completed successfully!")
 
     # Output summary
     summary = {
@@ -471,12 +471,8 @@ def main():
         'languages_updated': len(CONFIG['languages'])
     }
 
-    print("\n📊 Summary:")
+    print("\nSummary:")
     print(json.dumps(summary, indent=2))
-
-    # Write summary for GitHub Actions
-    with open('translation-summary.json', 'w') as f:
-        json.dump(summary, f, indent=2)
 
 
 if __name__ == '__main__':
