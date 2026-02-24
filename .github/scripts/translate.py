@@ -5,13 +5,17 @@ import json
 import re
 import time
 from datetime import datetime
-from typing import List, Dict, Tuple
+from typing import List, Dict
 import requests
 
 # Configuration
 CONFIG = {
     'anthropic_api_key': os.environ.get('ANTHROPIC_API_KEY', ''),
-    'model': 'claude-3-5-haiku-20241022',
+    'api_base_url': os.environ.get('ANTHROPIC_API_BASE_URL', 'https://api.anthropic.com'),
+    'model': os.environ.get('ANTHROPIC_MODEL', 'claude-3-5-haiku-latest'),
+    'model_fallbacks': [
+        'claude-3-5-haiku-latest'
+    ],
     'languages': {
         'de': 'German',
         'fr': 'French',
@@ -34,6 +38,13 @@ class LocalizationEntry:
 
     def __repr__(self):
         return f"LocalizationEntry(key={self.key}, value={self.value[:30]}...)"
+
+
+class ClaudeAPIError(Exception):
+    def __init__(self, message: str, status_code: int = None, retryable: bool = True):
+        super().__init__(message)
+        self.status_code = status_code
+        self.retryable = retryable
 
 
 def parse_strings_file(file_path: str) -> List[LocalizationEntry]:
@@ -110,8 +121,93 @@ def detect_changes(current_entries: List[LocalizationEntry], truth_data: Dict) -
     return changes
 
 
-def translate_with_claude(text: str, context: str, target_language: str, api_key: str) -> str:
-    """Call Claude API for translation"""
+def build_api_headers(api_key: str) -> Dict[str, str]:
+    return {
+        'Content-Type': 'application/json',
+        'x-api-key': api_key,
+        'anthropic-version': '2023-06-01'
+    }
+
+
+def parse_api_error(response: requests.Response) -> ClaudeAPIError:
+    status_code = response.status_code
+    request_id = response.headers.get('request-id', '')
+
+    error_type = 'unknown_error'
+    error_message = response.text.strip()
+    try:
+        payload = response.json()
+        if isinstance(payload, dict):
+            error_obj = payload.get('error', {})
+            error_type = error_obj.get('type', error_type)
+            error_message = error_obj.get('message', error_message)
+    except Exception:
+        pass
+
+    retryable = status_code >= 500 or status_code == 429
+    message = f"HTTP {status_code} ({error_type}): {error_message}"
+    if request_id:
+        message += f" [request-id: {request_id}]"
+
+    return ClaudeAPIError(message=message, status_code=status_code, retryable=retryable)
+
+
+def list_available_models(api_key: str) -> List[str]:
+    """Fetch available model ids from Anthropic API."""
+    url = f"{CONFIG['api_base_url'].rstrip('/')}/v1/models"
+    response = requests.get(url, headers=build_api_headers(api_key), timeout=30)
+
+    if not response.ok:
+        raise parse_api_error(response)
+
+    data = response.json()
+    if not isinstance(data, dict):
+        return []
+
+    models = data.get('data', [])
+    if not isinstance(models, list):
+        return []
+
+    model_ids = []
+    for model in models:
+        if isinstance(model, dict):
+            model_id = model.get('id')
+            if isinstance(model_id, str) and model_id:
+                model_ids.append(model_id)
+
+    return model_ids
+
+
+def resolve_model(api_key: str) -> str:
+    """Resolve to an available model id to avoid stale/deprecated defaults."""
+    requested = CONFIG['model']
+
+    try:
+        available = list_available_models(api_key)
+    except Exception as error:
+        print(f"⚠️  Could not fetch model list. Continuing with configured model '{requested}'.")
+        print(f"   Reason: {error}")
+        return requested
+
+    if not available:
+        print(f"⚠️  Model list was empty. Continuing with configured model '{requested}'.")
+        return requested
+
+    if requested in available:
+        return requested
+
+    for fallback in CONFIG['model_fallbacks']:
+        if fallback in available:
+            print(f"⚠️  Configured model '{requested}' is unavailable. Using '{fallback}' instead.")
+            return fallback
+
+    auto_selected = available[0]
+    print(f"⚠️  Configured model '{requested}' is unavailable. Using first available model '{auto_selected}'.")
+    return auto_selected
+
+
+def translate_with_claude(text: str, context: str, target_language: str, api_key: str, model: str) -> str:
+    """Call Claude Messages API for translation."""
     prompt = f"""You are a professional translator for mobile applications.
 
 Context: {context}
@@ -128,44 +224,53 @@ Translate the following text to {target_language}. Important guidelines:
 Text to translate: "{text}"
 
 Translation:"""
-
-    headers = {
-        'Content-Type': 'application/json',
-        'x-api-key': api_key,
-        'anthropic-version': '2023-06-01'
-    }
+    url = f"{CONFIG['api_base_url'].rstrip('/')}/v1/messages"
 
     data = {
-        'model': CONFIG['model'],
+        'model': model,
         'max_tokens': 1024,
         'messages': [{
             'role': 'user',
-            'content': prompt
+            'content': [{
+                'type': 'text',
+                'text': prompt
+            }]
         }]
     }
 
     response = requests.post(
-        'https://api.anthropic.com/v1/messages',
-        headers=headers,
+        url,
+        headers=build_api_headers(api_key),
         json=data,
         timeout=30
     )
 
-    response.raise_for_status()
+    if not response.ok:
+        raise parse_api_error(response)
+
     result = response.json()
 
-    if 'content' in result and len(result['content']) > 0:
-        return result['content'][0]['text'].strip()
-    else:
-        raise ValueError('Invalid response format from Claude API')
+    content_blocks = result.get('content', [])
+    if isinstance(content_blocks, list):
+        for block in content_blocks:
+            if isinstance(block, dict) and block.get('type') == 'text' and 'text' in block:
+                return block['text'].strip()
+
+    raise ValueError('Invalid response format from Claude API')
 
 
-def translate_with_retry(text: str, context: str, target_language: str, api_key: str) -> str:
+def translate_with_retry(text: str, context: str, target_language: str, api_key: str, model: str) -> str:
     """Translate with retry logic"""
     for attempt in range(CONFIG['max_retries']):
         try:
-            translation = translate_with_claude(text, context, target_language, api_key)
+            translation = translate_with_claude(text, context, target_language, api_key, model)
             return translation
+        except ClaudeAPIError as error:
+            print(f"   ❌ Translation attempt {attempt + 1} failed for {target_language}: {str(error)}")
+            if not error.retryable:
+                raise
+            if attempt < CONFIG['max_retries'] - 1:
+                time.sleep(CONFIG['retry_delay'] * (attempt + 1))
         except Exception as error:
             print(f"   ❌ Translation attempt {attempt + 1} failed for {target_language}: {str(error)}")
             if attempt < CONFIG['max_retries'] - 1:
@@ -249,6 +354,10 @@ def main():
         print("❌ Error: ANTHROPIC_API_KEY environment variable is not set")
         exit(1)
 
+    print("🤖 Resolving available Claude model...")
+    resolved_model = resolve_model(api_key)
+    print(f"   Using model: {resolved_model}\n")
+
     # Parse current English file
     print("📖 Parsing English localization file...")
     current_entries = parse_strings_file(CONFIG['source_file'])
@@ -281,11 +390,12 @@ def main():
             print(f"\n📝 Processing {lang_name} ({lang_code})...")
 
             translations = []
+            fatal_api_error = None
 
             for entry in entries_to_translate:
                 try:
                     print(f"   Translating: {entry.key}")
-                    translation = translate_with_retry(entry.value, entry.context, lang_name, api_key)
+                    translation = translate_with_retry(entry.value, entry.context, lang_name, api_key, resolved_model)
                     translations.append({
                         'key': entry.key,
                         'translation': translation,
@@ -294,6 +404,17 @@ def main():
 
                     # Small delay to avoid rate limiting
                     time.sleep(0.5)
+                except ClaudeAPIError as error:
+                    print(f"   ❌ Failed to translate {entry.key}: {str(error)}")
+                    if not error.retryable:
+                        fatal_api_error = error
+                        break
+
+                    translations.append({
+                        'key': entry.key,
+                        'translation': f"TODO: Translation failed - {entry.value}",
+                        'context': entry.context
+                    })
                 except Exception as error:
                     print(f"   ❌ Failed to translate {entry.key}: {str(error)}")
                     translations.append({
@@ -301,6 +422,11 @@ def main():
                         'translation': f"TODO: Translation failed - {entry.value}",
                         'context': entry.context
                     })
+
+            if fatal_api_error is not None:
+                print(f"   ⛔ {lang_name}: non-retryable API error, stopping run.")
+                print("\n❌ Aborting translation. Fix the API/model configuration and rerun.")
+                exit(1)
 
             # Load existing translations
             existing_path = f"AutotranslationTest/{lang_code}.lproj/Localizable.strings"
