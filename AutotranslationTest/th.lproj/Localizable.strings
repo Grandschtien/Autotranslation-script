@@ -2,3 +2,100 @@
   Localizable.strings
   AutotranslationTest - Thai
 */
+
+/* Application name displayed in navigation bar and app launcher */
+"app_name" = "ทดสอบการแปลอัตโนมัติ";
+
+/* Greeting text shown on the home screen header */
+"welcome" = "ยินดีต้อนรับ";
+
+/* Standard greeting message used in user notifications and messages */
+"hello" = "สวัสดี";
+
+/* Farewell message shown when user logs out or exits */
+"goodbye" = "ลาก่อน";
+
+/* Affirmative button text in confirmation dialogs */
+"yes" = "ใช่";
+
+/* Negative button text in confirmation dialogs */
+"no" = "ไม่";
+
+/* Primary action button text in alert dialogs */
+"ok" = "ตกลง";
+
+/* Secondary action button text to dismiss dialogs without saving */
+"cancel" = "ยกเลิก";
+
+/* Button text to save changes in forms and settings */
+"save" = "บันทึก";
+
+/* Button text to remove items, used in list views and detail screens */
+"delete" = "ลบ";
+
+/* Button text to enter edit mode in profile and settings screens */
+"edit" = "แก้ไข";
+
+/* Button text to complete an action or exit edit mode */
+"done" = "เสร็จสิ้น";
+
+/* Navigation button to return to previous screen */
+"back" = "ย้อนกลับ";
+
+/* Button text to proceed to the next step in multi-step flows */
+"next" = "ถัดไป";
+
+/* Button text to close modal views and dialogs */
+"close" = "ปิด";
+
+/* Welcome message displayed on the onboarding screen after first launch */
+"welcome_message" = ""ยินดีต้อนรับสู่แอปพลิเคชัน Auto Translation Test! เรายินดีที่มีคุณอยู่ที่นี่"";
+
+/* Loading indicator text shown during data fetch operations */
+"loading" = "กรุณารอสักครู่ขณะที่เรากำลังโหลดเนื้อหาของคุณ...";
+
+/* Generic error message shown in alert dialog when operations fail */
+"error_message" = "เกิดข้อผิดพลาดที่ไม่คาดคิด กรุณาลองใหม่อีกครั้งในภายหลัง หรือติดต่อฝ่ายสนับสนุนหากปัญหายังคงอยู่";
+
+/* Success message displayed in toast notification after successful operations */
+"success_message" = "ดำเนินการเสร็จสมบูรณ์แล้ว! คุณสามารถดำเนินการในขั้นตอนถัดไปได้เลย";
+
+/* Confirmation dialog message for destructive actions like delete */
+"confirmation_message" = ""คุณแน่ใจหรือไม่ว่าต้องการดำเนินการนี้? การกระทำนี้ไม่สามารถยกเลิกได้"";
+
+/* Title on the settings screen navigation bar */
+"settings_title" = "การตั้งค่าแอปพลิเคชัน";
+
+/* Title on the user profile screen navigation bar */
+"profile_title" = "โปรไฟล์ผู้ใช้";
+
+/* Section header in settings for notification preferences */
+"notifications_title" = "การตั้งค่าการแจ้งเตือน";
+
+/* Instruction text above language picker in settings */
+"language_selection" = "โปรดเลือกภาษาที่คุณต้องการจากรายการด้านล่าง";
+
+/* Button text at bottom of profile edit form to commit changes */
+"save_changes" = "บันทึกการเปลี่ยนแปลงทั้งหมดในโปรไฟล์";
+
+/* Button text at bottom of profile edit form to revert changes */
+"discard_changes" = "ยกเลิกการเปลี่ยนแปลงทั้งหมด";
+
+/* First step description in the onboarding tutorial flow */
+"tutorial_step_1" = ""ในขั้นตอนแรกนี้ คุณจะได้เรียนรู้วิธีการนำทางผ่านอินเทอร์เฟซของแอปพลิเคชัน และเข้าถึงฟีเจอร์หลักต่างๆ ที่มีให้คุณใช้งาน"";
+
+/* Second step description in the onboarding tutorial flow */
+"tutorial_step_2" = ""ตอนนี้คุณเข้าใจพื้นฐานแล้ว มาสำรวจฟีเจอร์ขั้นสูงที่จะช่วยให้คุณใช้งานแอปพลิเคชันนี้ได้อย่างเต็มที่กัน"";
+
+/* Final step description in the onboarding tutorial flow */
+"tutorial_step_3" = "ยินดีด้วย! คุณทำแบบฝึกหัดเสร็จสมบูรณ์แล้ว และพร้อมที่จะใช้งานฟีเจอร์อันทรงพลังทั้งหมดที่แอปพลิเคชันนี้มีให้แล้ว";
+
+/* Status message shown during cloud synchronization with progress indicator */
+"data_sync_message" = "ข้อมูลของคุณกำลังถูกซิงโครไนซ์กับเซิร์ฟเวอร์คลาวด์ของเรา กระบวนการนี้อาจใช้เวลาหลายนาทีขึ้นอยู่กับความเร็วการเชื่อมต่ออินเทอร์เน็ตของคุณ";
+
+/* Privacy policy summary text displayed in settings and onboarding */
+"privacy_notice" = "เราให้ความสำคัญกับความเป็นส่วนตัวของคุณอย่างจริงจัง ข้อมูลส่วนบุคคลทั้งหมดของคุณได้รับการเข้ารหัสและจัดเก็บอย่างปลอดภัย สอดคล้องกับมาตรฐานการคุ้มครองข้อมูลระหว่างประเทศ";
+
+/* Alert message shown when app update is available, with update button */
+"update_available" = "มีแอปพลิเคชันเวอร์ชันใหม่พร้อมให้ดาวน์โหลดแล้ว คุณต้องการอัปเดตตอนนี้เพื่อเพลิดเพลินกับฟีเจอร์และการปรับปรุงล่าสุดหรือไม่?";
+
