@@ -98,3 +98,6 @@
 
 /* Alert message shown when app update is available, with update button */
 "update_available" = "A new version of the application is available for download. Would you like to update now to enjoy the latest features and improvements?";
+
+/* Title of section in the file with several sections */
+"screen_cast" = "Screencast: Anomaly Detection ";
