@@ -47,6 +47,83 @@ class ClaudeAPIError(Exception):
         self.retryable = retryable
 
 
+def sanitize_strings_value(text: str) -> str:
+    """
+    Make a value safe to embed inside an iOS .strings quoted literal.
+
+    Claude sometimes returns quoted strings (e.g. "\"Hola\""), which would become
+    ""Hola"" after we wrap it again. We strip one layer of surrounding quotes and
+    escape internal quotes/backslashes/newlines for .strings format.
+    """
+    if text is None:
+        return ''
+
+    value = str(text).strip()
+
+    quote_pairs = [
+        ('"', '"'),
+        ('“', '”'),
+        ('„', '“'),
+        ('«', '»'),
+        ('‹', '›')
+    ]
+    for left, right in quote_pairs:
+        if len(value) >= 2 and value.startswith(left) and value.endswith(right):
+            value = value[1:-1].strip()
+            break
+
+    value = value.replace('\\', '\\\\')
+    value = value.replace('"', '\\"')
+    value = value.replace('\r\n', '\n').replace('\r', '\n').replace('\n', '\\n')
+    return value
+
+def upsert_localization_entries(lang_code: str, entries: List[Dict]):
+    file_path = f"AutotranslationTest/{lang_code}.lproj/Localizable.strings"
+    language_name = CONFIG['languages'][lang_code]
+
+    if os.path.exists(file_path):
+        with open(file_path, 'r', encoding='utf-8') as f:
+            lines = f.read().splitlines()
+    else:
+        lines = [
+            "/*",
+            "  Localizable.strings",
+            f"  AutotranslationTest - {language_name}",
+            "*/",
+            ""
+        ]
+
+    # Map key -> line index of the key/value line.
+    key_line_index: Dict[str, int] = {}
+    kv_re = re.compile(r'^\s*"([^"]+)"\s*=\s*"(.*)";\s*$')
+    for idx, line in enumerate(lines):
+        m = kv_re.match(line)
+        if m:
+            key_line_index[m.group(1)] = idx
+    to_append: List[Dict] = []
+    for entry in entries:
+        key = entry['key']
+        translation = sanitize_strings_value(entry.get('translation', ''))
+
+        if key in key_line_index:
+            idx = key_line_index[key]
+            lines[idx] = f"\"{key}\" = \"{translation}\";"
+        else:
+            to_append.append({'key': key, 'translation': translation})
+
+    if to_append:
+        if lines and lines[-1].strip() != "":
+            lines.append("")
+        for entry in to_append:
+            lines.append(f"\"{entry['key']}\" = \"{entry['translation']}\";")
+            lines.append("")
+
+    with open(file_path, 'w', encoding='utf-8') as f:
+        f.write("\n".join(lines) + "\n")
+
+    print(f"Updated {lang_code}.lproj/Localizable.strings")
+
+
 def parse_strings_file(file_path: str) -> List[LocalizationEntry]:
     """Parse .strings file to extract keys, values, and contexts"""
     with open(file_path, 'r', encoding='utf-8') as f:
@@ -280,19 +357,8 @@ def translate_with_retry(text: str, context: str, target_language: str, api_key:
 
 
 def update_localization_file(lang_code: str, entries: List[Dict]):
-    """Update localization file for a language"""
-    file_path = f"AutotranslationTest/{lang_code}.lproj/Localizable.strings"
-
-    language_name = CONFIG['languages'][lang_code]
-    content = f"/*\n  Localizable.strings\n  AutotranslationTest - {language_name}\n*/\n\n"
-
-    for entry in entries:
-        content += f'"{entry["key"]}" = {entry["translation"]};\n\n'
-
-    with open(file_path, 'w', encoding='utf-8') as f:
-        f.write(content)
-
-    print(f"Updated {lang_code}.lproj/Localizable.strings")
+    # Backward-compatible wrapper.
+    upsert_localization_entries(lang_code, entries)
 
 
 def remove_deleted_keys(lang_code: str, deleted_keys: List[str]):
@@ -397,8 +463,7 @@ def main():
                     translation = translate_with_retry(entry.value, entry.context, lang_name, api_key, resolved_model)
                     translations.append({
                         'key': entry.key,
-                        'translation': translation,
-                        'context': entry.context
+                        'translation': translation
                     })
 
                     # Small delay to avoid rate limiting
@@ -412,14 +477,12 @@ def main():
                     translations.append({
                         'key': entry.key,
                         'translation': f"TODO: Translation failed - {entry.value}",
-                        'context': entry.context
                     })
                 except Exception as error:
                     print(f"   Failed to translate {entry.key}: {str(error)}")
                     translations.append({
                         'key': entry.key,
                         'translation': f"TODO: Translation failed - {entry.value}",
-                        'context': entry.context
                     })
 
             if fatal_api_error is not None:
@@ -427,27 +490,8 @@ def main():
                 print("\nAborting translation. Fix the API/model configuration and rerun.")
                 exit(1)
 
-            # Load existing translations
-            existing_path = f"AutotranslationTest/{lang_code}.lproj/Localizable.strings"
-            existing_entries = []
-            if os.path.exists(existing_path):
-                try:
-                    existing_entries = parse_strings_file(existing_path)
-                except Exception:
-                    pass
-
-            # Merge with new translations
-            existing_keys = {t['key'] for t in translations}
-            merged_entries = translations + [
-                {
-                    'key': e.key,
-                    'translation': e.value,
-                    'context': e.context
-                }
-                for e in existing_entries if e.key not in existing_keys
-            ]
-
-            update_localization_file(lang_code, merged_entries)
+            # Update only the keys we translated/changed; keep existing file order.
+            update_localization_file(lang_code, translations)
 
     # Handle deleted keys
     if changes['deleted']:
