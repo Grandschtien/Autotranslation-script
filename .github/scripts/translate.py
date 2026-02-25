@@ -287,8 +287,7 @@ def update_localization_file(lang_code: str, entries: List[Dict]):
     content = f"/*\n  Localizable.strings\n  AutotranslationTest - {language_name}\n*/\n\n"
 
     for entry in entries:
-        content += f"/* {entry['context']} */\n"
-        content += f'"{entry["key"]}" = "{entry["translation"]}";\n\n'
+        content += f'"{entry["key"]}" = {entry["translation"]};\n\n'
 
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(content)
