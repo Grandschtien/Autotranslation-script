@@ -49,10 +49,7 @@
 "close" = "Close";
 
 /* Welcome message displayed on the onboarding screen after first launch */
-"welcome_message" = "Welcome to the Auto Translation Test application! We're glad to have you here.";
-
-/* Loading indicator text shown during data fetch operations */
-"loading" = "Please wait while we're loading your content...";
+"welcome_message" = "Nice to meet you again in the Auto Translation Test application! We're glad to have you here.";
 
 /* Generic error message shown in alert dialog when operations fail */
 "error_message" = "An unexpected error has occurred. Please try again later or contact support if the problem persists.";
