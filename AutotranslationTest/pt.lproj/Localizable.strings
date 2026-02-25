@@ -3,6 +3,9 @@
   AutotranslationTest - Portuguese
 */
 
+/* Title of section in the file with several sections */
+"screen_cast" = ""Screencast: Detecção de Anomalias"";
+
 /* Application name displayed in navigation bar and app launcher */
 "app_name" = ""Teste de Tradução Automática"";
 

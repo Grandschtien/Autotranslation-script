@@ -3,6 +3,9 @@
   AutotranslationTest - Thai
 */
 
+/* Title of section in the file with several sections */
+"screen_cast" = ""Screencast: การตรวจจับความผิดปกติ"";
+
 /* Application name displayed in navigation bar and app launcher */
 "app_name" = "ทดสอบการแปลอัตโนมัติ";
 

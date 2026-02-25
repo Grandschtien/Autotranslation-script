@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-02-24T18:33:00.973229Z",
+  "last_updated": "2026-02-25T04:53:25.836225Z",
   "keys": {
     "app_name": "Auto Translation Test",
     "welcome": "Welcome",
@@ -32,6 +32,7 @@
     "tutorial_step_3": "Congratulations! You've completed the tutorial and are now ready to use all the powerful features this application has to offer.",
     "data_sync_message": "Your data is currently being synchronized with our cloud servers. This process may take several minutes depending on your internet connection speed.",
     "privacy_notice": "We take your privacy seriously. All your personal information is encrypted and stored securely in compliance with international data protection standards.",
-    "update_available": "A new version of the application is available for download. Would you like to update now to enjoy the latest features and improvements?"
+    "update_available": "A new version of the application is available for download. Would you like to update now to enjoy the latest features and improvements?",
+    "screen_cast": "Screencast: Anomaly Detection "
   }
 }

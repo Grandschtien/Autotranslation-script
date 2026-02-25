@@ -3,6 +3,9 @@
   AutotranslationTest - French
 */
 
+/* Title of section in the file with several sections */
+"screen_cast" = ""Enregistrement d'écran : Détection d'anomalies "";
+
 /* Application name displayed in navigation bar and app launcher */
 "app_name" = ""Test de traduction automatique"";
 

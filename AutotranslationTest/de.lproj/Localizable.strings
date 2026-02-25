@@ -3,6 +3,9 @@
   AutotranslationTest - German
 */
 
+/* Title of section in the file with several sections */
+"screen_cast" = "Screencast: Anomalieerkennung";
+
 /* Application name displayed in navigation bar and app launcher */
 "app_name" = "„Automatischer Übersetzungstest"";
 
