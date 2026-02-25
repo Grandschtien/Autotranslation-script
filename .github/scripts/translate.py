@@ -48,13 +48,6 @@ class ClaudeAPIError(Exception):
 
 
 def sanitize_strings_value(text: str) -> str:
-    """
-    Make a value safe to embed inside an iOS .strings quoted literal.
-
-    Claude sometimes returns quoted strings (e.g. "\"Hola\""), which would become
-    ""Hola"" after we wrap it again. We strip one layer of surrounding quotes and
-    escape internal quotes/backslashes/newlines for .strings format.
-    """
     if text is None:
         return ''
 
@@ -167,13 +160,11 @@ def parse_strings_file(file_path: str) -> List[LocalizationEntry]:
 
 
 def load_truth_file() -> Dict:
-    """Load source of truth file"""
     with open(CONFIG['truth_file'], 'r', encoding='utf-8') as f:
         return json.load(f)
 
 
 def detect_changes(current_entries: List[LocalizationEntry], truth_data: Dict) -> Dict[str, List]:
-    """Detect changes between current and truth"""
     changes = {
         'new': [],
         'modified': [],
@@ -256,7 +247,6 @@ def list_available_models(api_key: str) -> List[str]:
 
 
 def resolve_model(api_key: str) -> str:
-    """Resolve to an available model id to avoid stale/deprecated defaults."""
     requested = CONFIG['model']
 
     try:
@@ -337,7 +327,6 @@ Translation:"""
 
 
 def translate_with_retry(text: str, context: str, target_language: str, api_key: str, model: str) -> str:
-    """Translate with retry logic"""
     for attempt in range(CONFIG['max_retries']):
         try:
             translation = translate_with_claude(text, context, target_language, api_key, model)
@@ -362,7 +351,6 @@ def update_localization_file(lang_code: str, entries: List[Dict]):
 
 
 def remove_deleted_keys(lang_code: str, deleted_keys: List[str]):
-    """Remove deleted keys from language file"""
     file_path = f"AutotranslationTest/{lang_code}.lproj/Localizable.strings"
 
     if not os.path.exists(file_path):
@@ -397,7 +385,6 @@ def remove_deleted_keys(lang_code: str, deleted_keys: List[str]):
 
 
 def update_truth_file(current_entries: List[LocalizationEntry]):
-    """Update source of truth file"""
     truth_data = {
         'last_updated': datetime.utcnow().isoformat() + 'Z',
         'keys': {entry.key: entry.value for entry in current_entries}
@@ -410,7 +397,6 @@ def update_truth_file(current_entries: List[LocalizationEntry]):
 
 
 def main():
-    """Main execution"""
     print("Starting auto-translation process...\n")
 
     # Validate API key
