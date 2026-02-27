@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-02-24T18:33:00.973229Z",
+  "last_updated": "2026-02-27T04:45:57.908909Z",
   "keys": {
     "app_name": "Auto Translation Test",
     "welcome": "Welcome",
@@ -16,8 +16,7 @@
     "back": "Back",
     "next": "Next",
     "close": "Close",
-    "welcome_message": "Welcome to the Auto Translation Test application! We're glad to have you here.",
-    "loading": "Please wait while we're loading your content...",
+    "welcome_message": "Nice to meet you again in the Auto Translation Test application! We're glad to have you here.",
     "error_message": "An unexpected error has occurred. Please try again later or contact support if the problem persists.",
     "success_message": "Your operation has been completed successfully! You can now proceed to the next step.",
     "confirmation_message": "Are you sure you want to proceed with this action? This cannot be undone.",
@@ -32,6 +31,7 @@
     "tutorial_step_3": "Congratulations! You've completed the tutorial and are now ready to use all the powerful features this application has to offer.",
     "data_sync_message": "Your data is currently being synchronized with our cloud servers. This process may take several minutes depending on your internet connection speed.",
     "privacy_notice": "We take your privacy seriously. All your personal information is encrypted and stored securely in compliance with international data protection standards.",
-    "update_available": "A new version of the application is available for download. Would you like to update now to enjoy the latest features and improvements?"
+    "update_available": "A new version of the application is available for download. Would you like to update now to enjoy the latest features and improvements?",
+    "screen_cast": "Screencast: Anomaly Detection "
   }
 }
