@@ -49,10 +49,8 @@
 "close" = ""Fechar"";
 
 /* Welcome message displayed on the onboarding screen after first launch */
-"welcome_message" = ""Bem-vindo ao aplicativo Auto Translation Test! Estamos felizes em ter você aqui."";
+"welcome_message" = "É um prazer encontrá-lo novamente no aplicativo Auto Translation Test! Ficamos felizes em tê-lo aqui.";
 
-/* Loading indicator text shown during data fetch operations */
-"loading" = ""Aguarde enquanto carregamos seu conteúdo..."";
 
 /* Generic error message shown in alert dialog when operations fail */
 "error_message" = ""Ocorreu um erro inesperado. Tente novamente mais tarde ou entre em contato com o suporte se o problema persistir."";
@@ -98,4 +96,6 @@
 
 /* Alert message shown when app update is available, with update button */
 "update_available" = ""Uma nova versão do aplicativo está disponível para download. Deseja atualizar agora para aproveitar os recursos e melhorias mais recentes?"";
+
+"screen_cast" = "Screencast: Detecção de Anomalias";
 
