@@ -49,10 +49,8 @@
 "close" = "Tutup";
 
 /* Welcome message displayed on the onboarding screen after first launch */
-"welcome_message" = ""Selamat datang ke aplikasi Auto Translation Test! Kami gembira anda berada di sini."";
+"welcome_message" = "Senang berjumpa anda lagi dalam aplikasi Auto Translation Test! Kami gembira anda berada di sini.";
 
-/* Loading indicator text shown during data fetch operations */
-"loading" = ""Sila tunggu semasa kami memuatkan kandungan anda..."";
 
 /* Generic error message shown in alert dialog when operations fail */
 "error_message" = ""Ralat tidak dijangka telah berlaku. Sila cuba lagi kemudian atau hubungi sokongan jika masalah berterusan."";
@@ -98,4 +96,6 @@
 
 /* Alert message shown when app update is available, with update button */
 "update_available" = ""Versi baharu aplikasi tersedia untuk dimuat turun. Adakah anda ingin mengemas kini sekarang untuk menikmati ciri dan penambahbaikan terkini?"";
+
+"screen_cast" = "Screencast: Pengesanan Anomali";
 
