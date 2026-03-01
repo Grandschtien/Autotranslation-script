@@ -49,10 +49,8 @@
 "close" = "ปิด";
 
 /* Welcome message displayed on the onboarding screen after first launch */
-"welcome_message" = ""ยินดีต้อนรับสู่แอปพลิเคชัน Auto Translation Test! เรายินดีที่มีคุณอยู่ที่นี่"";
+"welcome_message" = "ยินดีต้อนรับกลับมายังแอปพลิเคชัน Auto Translation Test! เรายินดีที่ได้มีคุณอยู่ที่นี่";
 
-/* Loading indicator text shown during data fetch operations */
-"loading" = "กรุณารอสักครู่ขณะที่เรากำลังโหลดเนื้อหาของคุณ...";
 
 /* Generic error message shown in alert dialog when operations fail */
 "error_message" = "เกิดข้อผิดพลาดที่ไม่คาดคิด กรุณาลองใหม่อีกครั้งในภายหลัง หรือติดต่อฝ่ายสนับสนุนหากปัญหายังคงอยู่";
@@ -98,4 +96,6 @@
 
 /* Alert message shown when app update is available, with update button */
 "update_available" = "มีแอปพลิเคชันเวอร์ชันใหม่พร้อมให้ดาวน์โหลดแล้ว คุณต้องการอัปเดตตอนนี้เพื่อเพลิดเพลินกับฟีเจอร์และการปรับปรุงล่าสุดหรือไม่?";
+
+"screen_cast" = "สกรีนแคสต์: การตรวจจับความผิดปกติ";
 
